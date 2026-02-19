@@ -35,7 +35,6 @@
       
     </div>
     </nav>
-    </nav>
     <main>
         <header class="mb-4">
             <h1 class="display-5 text-center mt-5">Analysis of New Car Sales in Norway by Model</h1>
@@ -47,7 +46,15 @@
       
   
    
-  </body>
+<h5 class="text-center mt-5">Most Sold Car Makes Per Year (2007–2016)</h5>
+<div id="graph">
+
+<div class="d-flex justify-content-center">
+  <div style="width:700px;">
+    <canvas id="mostSoldChart"></canvas>
+  </div>
+</div>
+
  
  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js" integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI" crossorigin="anonymous"></script>
 <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
@@ -59,9 +66,11 @@
 </div>
 
 <script>
-const ctx = document.getElementById('carSalesChart').getContext('2d');
+const ctx2 = document.getElementById("mostSoldChart").getContext("2d");
 
-new Chart(ctx, {
+
+new Chart(ctx2, {
+
   type: 'line',
   data: {
     labels: ['2007','2008','2009','2010','2011','2012','2013','2014','2015','2016'],
@@ -112,9 +121,10 @@ new Chart(ctx, {
 
 
 
+
   </section>
           <article id="analysis" class="custom-nav rounded mb-4 p-4 ">
-            <h2>Analysis: </h2>
+            <h2>Analysis of Graph 1: </h2>
             <h5>Key Findings:</h5>
             <p>  • Car sales began to decline between 2007 to 2009.</p>
             <p>  • Sales began to recover and improve from 2010.</p>
@@ -122,5 +132,117 @@ new Chart(ctx, {
             <p>  • 2016 is the year with the highest record of sales in the dataset.</p>
             <p>  • 2009 is the year with the lowest record of sales in the dataset.</p>
         </article>
+
+
+   
+    <script>
+      const ctx = document.getElementById("carSalesChart");
+
+      const years = [
+        "2007",
+        "2008",
+        "2009",
+        "2010",
+        "2011",
+        "2012",
+        "2013",
+        "2014",
+        "2015",
+        "2016",
+      ];
+      const unitsSold = [
+        18437, 12503, 11051, 16118, 18223, 16560, 15145, 18285, 22074, 22535,
+      ];
+      const makes = [
+        "Toyota",
+        "Toyota",
+        "Volkswagen",
+        "Volkswagen",
+        "Volkswagen",
+        "Volkswagen",
+        "Toyota",
+        "Volkswagen",
+        "Volkswagen",
+        "Volkswagen",
+      ];
+        
+      const colors = [
+        "lightblue",
+        "lightblue",
+        "lightgreen",
+        "lightgreen",
+        "lightgreen",
+        "lightgreen",
+        "lightblue",
+        "lightgreen",
+        "lightgreen",
+        "lightgreen",
+      ];
+
+      const borderColors = [
+        "lightblue",
+        "lightblue",
+        "lightgreen",
+        "lightgreen",
+        "lightgreen",
+        "lightgreen",
+        "lightblue",
+        "lightgreen",
+        "lightgreen",
+        "lightgreen",
+      ];
+
+      new Chart(ctx, {
+        type: "bar",
+        data: {
+          labels: years,
+          datasets: [
+            {
+              label: "Units Sold",
+              data: unitsSold,
+              backgroundColor: colors,
+              borderColor: borderColors,
+              borderWidth: 1,
+            },
+          ],
+        },
+        options: {
+          responsive: true,
+          plugins: {
+            legend: { display: false },
+            tooltip: {
+              callbacks: {
+                label: function (context) {
+                  const yearIndex = context.dataIndex;
+                  return makes[yearIndex] + ": " + context.raw + " units";
+                },
+              },
+            },
+          },
+          scales: {
+            y: {
+              beginAtZero: true,
+              title: { display: true, text: "Units Sold" },
+            },
+            x: {
+              title: { display: true, text: "Year" },
+            },
+          },
+        },
+      });
+    </script>
+
+
+
+          <article id="analysis" class="custom-nav rounded mb-4 p-4 ">
+            <h2>Analysis of Graph 2: </h2>
+            <h5>Key Findings:</h5>
+            <p>  • Toyota was the most sold car brand in 2007, 2008 and 2013.</p>
+            <p>  • Volkswagen has the most sales from 2009 to 2012 and again in 2014 to 2016.</p>
+            <p>  • 2016 recorded the highest figure of sales overall for a single brand (Volkswagen).</p>
+            <p>  • This graph shows that Volkswagen became more dominant over time.</p>
+        </article>
+
+
 </main>
  </html>
